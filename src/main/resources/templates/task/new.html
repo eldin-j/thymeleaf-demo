@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Task</title>
+</head>
+<body>
+<h1>Create Task</h1>
+<form th:action="@{/tasks}" method="post" th:object="${task}">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" th:field="*{title}" required />
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <textarea id="description" th:field="*{description}"></textarea>
+    </div>
+    <div>
+        <label for="due_date">Due Date:</label>
+        <input type="date" id="due_date" th:field="*{dueDate}" required />
+    </div>
+    <div>
+        <label for="priority">Priority:</label>
+        <select id="priority" th:field="*{priority.id}" required>
+            <option value="" disabled selected>Select Priority</option>
+            <option th:each="priority : ${priorities}" th:value="${priority.id}" th:text="${priority.priority}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="category">Category:</label>
+        <select id="category" th:field="*{category.id}" required>
+            <option value="" disabled selected>Select Category</option>
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+    </div>
+    <button type="submit">Create Task</button>
+</form>
+<a href="/tasks">Back to Task List</a>
+</body>
+</html>

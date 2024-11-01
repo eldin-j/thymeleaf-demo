@@ -29,6 +29,16 @@
 --     description TEXT
 -- );
 
+-- -- Insert sample categories into the 'categories' table
+-- INSERT INTO categories (name, description) VALUES
+--     ('Work', 'Tasks related to professional responsibilities'),
+--     ('Personal', 'Personal tasks and responsibilities'),
+--     ('Study', 'Educational tasks and assignments'),
+--     ('Fitness', 'Tasks related to health and fitness'),
+--     ('Hobbies', 'Tasks related to personal hobbies and leisure activities'),
+--     ('Shopping', 'Grocery and shopping tasks'),
+--     ('Family', 'Family-related tasks and commitments');
+
 -- -- Create the 'task_status' table (lookup table for task statuses)
 -- CREATE TABLE task_status (
 --     id SERIAL PRIMARY KEY,
@@ -65,11 +75,37 @@
 --     priority_id INTEGER NOT NULL REFERENCES task_priority(id)
 -- );
 
--- Query to select all users from the 'users' table
-SELECT 
-    id,
-    username,
-    email,
-    created_at
-FROM 
-    users;
+
+-- -- Query to select all users from the 'users' table
+-- SELECT 
+--     id,
+--     username,
+--     email,
+--     created_at
+-- FROM 
+--     users;
+
+
+-- -- Query to select all tasks from the 'tasks' table along with related user, category, status, and priority
+-- SELECT 
+--     t.id AS task_id,
+--     t.title,
+--     t.description,
+--     t.due_date,
+--     u.username AS assigned_user,
+--     c.name AS category,
+--     s.status AS task_status,
+--     p.priority AS task_priority
+-- FROM 
+--     tasks t
+-- JOIN 
+--     users u ON t.user_id = u.id
+-- LEFT JOIN 
+--     categories c ON t.category_id = c.id
+-- JOIN 
+--     task_status s ON t.status_id = s.id
+-- JOIN 
+--     task_priority p ON t.priority_id = p.id
+-- ORDER BY 
+--     t.due_date;  -- Optional: orders tasks by due date
+
